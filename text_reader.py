@@ -13,9 +13,20 @@ class MainWindow(QDialog):
         fname=QFileDialog.getOpenFileName(self, "open file", "c:/users",'TXT files(*.txt)')
         fpath=fname[0]
         if fname[0]!="":
-            f=open(fpath)
-            print(f.read())
-            f.close()
+            f=fpath
+            self.filterline(f)
+        else:
+            print("Please Choose file..!")
+
+    def filterline(self,f):
+        f=open(f)
+        newfile=open("C:/Users/vikram/Desktop/dummy1.txt", "a")
+        for line in f:
+            if "not ok" or "NOT OK" in line:
+                newfile.write(line)
+        f.close()
+        newfile.close()
+        print("Operation Success..!")
         
 
 app=QApplication(sys.argv)
